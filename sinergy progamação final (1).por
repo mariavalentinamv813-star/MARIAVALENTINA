@@ -2,8 +2,10 @@ programa {
   funcao inicio() {
   cadeia placas[3], continuar, nomes[3], placaPesquisar, opcaoCad[3]
   inteiro opcao
+  logico encontrado = falso
   faca{
     limpa()
+    encontrado = falso
     escreva("MENU - CANCELA SINERGY\n\n")
     escreva("1 - Cadastro de dados\n")
     escreva("2 - Pesquisa por placa\n")
@@ -19,7 +21,7 @@ programa {
         limpa()
         escreva("> CADASTRO\n\n\n")
         para(inteiro i = 0; i < 3; i++){
-          escreva("Digite seu  nome do seu cadastro ", i + 1, ": \n")
+          escreva("Digite o nome do seu cadastro ", i + 1, ": \n")
           leia(nomes[i])
           escreva("Digite a placa do veículo: \n")
           leia(placas[i])
@@ -32,14 +34,21 @@ programa {
       caso 2:
         limpa()
         escreva("> PESQUISA POR PLACA\n\n\n")
-        para(inteiro i = 0; i < 3; i++){
-          escreva("Digite a placa do veículo que deseja encontrar: ")
+        escreva("Digite a placa do veículo que deseja encontrar: ")
         leia(placaPesquisar)
-        se(placas[i] == placaPesquisar){
-          escreva("Nome: ", nomes[i], "Placa: ", placas[i])
+        para(inteiro i = 0; i < 3; i++){
+          se(placas[i] == placaPesquisar){
+            encontrado = verdadeiro
+            escreva("Nome: ", nomes[i], "\n", "Placa: ", placas[i], "\n","meio: ", opcaoCad[i])
         }
         escreva("\n")
         }
+        se(encontrado == falso){
+          limpa()
+          escreva("Placa não encontrada.\n\n")
+        }
+        escreva("Clique 'enter' para voltar ao menu: ")
+        leia(continuar)
         
       pare
       caso 0:
@@ -47,7 +56,10 @@ programa {
         escreva("Até mais!\n")
       pare
       caso contrario:
-        escreva("Ops...Opção inválida")
+        limpa()
+        escreva("Ops...Opção inválida\n\n")
+        escreva("Clique 'enter' para voltar ao menu: ")
+        leia(continuar)
       pare
     }
     
